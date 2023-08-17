@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "mocha tests/*.js -s 1000 -t 60000 --exit",
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",

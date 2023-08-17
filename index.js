@@ -1,27 +1,27 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const cors = require("cors");
-app.use(cors({ origin:"*"}));
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }));
 
-const apiV1 = require('./api/v1/routing');
-app.use('/api/v1', apiV1);
+const apiv1 = require("./api/v1/routing");
+app.use("/api/v1", apiv1);
 
-//get hostname
+// Get hostname
 let hostname;
-if(process.env.VCAP_APPLICATION){
-    const vcap = JSON.parse(process.env.VCAP_APPLICATION);
-    hostname  = 'https://' + vcap.application_uris[0];
-}else{
-    hostname = `http://localhost:${port}`;
+if (process.env.VCAP_APPLICATION) {
+  const vcap = JSON.parse(process.env.VCAP_APPLICATION);
+  hostname = "https://" + vcap.application_uris[0];
+} else {
+  hostname = `http://localhost:${port}`;
 }
 
-app.listen(port, function(){
-    console.log('listening at port 3000')
-})
+app.listen(port, function () {
+  console.log(`listening at ${hostname}`);
+});
 
 module.exports = app;
